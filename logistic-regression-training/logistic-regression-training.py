@@ -13,7 +13,7 @@ def train_logistic_regression(X, y, lr=0.1, steps=1000):
     y = np.array(y)
     N, D = X.shape
     w = np.zeros((D))
-    b = np.array([0.0])
+    b = 0.0
     
     for _ in range(steps):
         z = (X @ w) + b
@@ -24,8 +24,7 @@ def train_logistic_regression(X, y, lr=0.1, steps=1000):
         w = w - lr * g_w
         b = b - lr * g_b
 
-    
-    return (w, b.item())
+    return (w, b)
         
         
         
