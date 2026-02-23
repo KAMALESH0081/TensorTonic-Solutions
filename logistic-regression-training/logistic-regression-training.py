@@ -3,11 +3,6 @@ import numpy as np
 def _sigmoid(z):
     """Numerically stable sigmoid implementation."""
     return np.where(z >= 0, 1/(1+np.exp(-z)), np.exp(z)/(1+np.exp(z)))
-    
-def forward(x, w, b):
-    z = (x @ w) + b
-    y_h = _sigmoid(z)
-    return y_h
 
 def train_logistic_regression(X, y, lr=0.1, steps=1000):
     """
@@ -21,7 +16,8 @@ def train_logistic_regression(X, y, lr=0.1, steps=1000):
     b = np.array([0.0])
     
     for _ in range(steps):
-        y_h = forward(X, w, b)
+        z = (X @ w) + b
+        y_h = _sigmoid(z)
         g_s = y_h - y
         g_w = (X.T @ g_s)/ N
         g_b = np.mean(g_s)
