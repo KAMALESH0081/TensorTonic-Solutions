@@ -6,6 +6,5 @@ def relu(x):
     """
     # Write code here
     x = np.array(x)
-    condition = x <= 0
-    x[condition] = 0
+    x[x <= 0] = 0
     return x
