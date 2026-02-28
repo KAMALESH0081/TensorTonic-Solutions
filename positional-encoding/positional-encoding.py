@@ -1,19 +1,20 @@
 import numpy as np
 
-def dim_list(d_model):
-    dlist = []
-    for i in range(0, d_model, 2):
-        dlist.append(i)
-        dlist.append(i)
-    return dlist
-
 def positional_encoding(seq_len, d_model, base=10000.0):
-    j = dim_list(d_model)
-    m = np.zeros((seq_len, d_model))
-    for t in range(seq_len):
-        for k in range(d_model):
-            if k % 2 == 0:
-               m[t][k] = np.sin(t/(base ** ((j[k])/d_model)))
-            else:
-               m[t][k] = np.cos(t/(base ** ((j[k])/d_model)))
-    return m
+
+    position = np.arange(seq_len, dtype=float)[:, np.newaxis]
+
+    dim = np.arange(d_model, dtype=float)[np.newaxis, :]
+
+    pair_index = np.floor(dim / 2)
+
+    angle_rates = base ** (-2 * pair_index / d_model)
+
+    angles = position * angle_rates
+
+    pe = np.zeros((seq_len, d_model), dtype=float)
+
+    pe[:, 0::2] = np.sin(angles[:, 0::2])
+    pe[:, 1::2] = np.cos(angles[:, 1::2])
+
+    return pe
