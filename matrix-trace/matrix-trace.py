@@ -10,4 +10,3 @@ def matrix_trace(A):
         result += A[i, i]
 
     return result
-        
