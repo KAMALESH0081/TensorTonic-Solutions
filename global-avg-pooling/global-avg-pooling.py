@@ -10,7 +10,7 @@ def global_avg_pool(x):
     if x.ndim == 3:
         result = np.mean(x, axis = (1, 2))
     elif x.ndim == 4:
-        result = np.mean(x, axis = (2,3)) #.reshape(1,-1)
+        result = np.mean(x, axis = (2,3))
     else:
         raise ValueError("Value Error")
     return result
