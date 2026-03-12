@@ -13,8 +13,8 @@ def layer_norm(x: np.ndarray, gamma: np.ndarray, beta: np.ndarray, eps: float = 
     Returns:
         Normalized array of same shape as x
     """
-    mean = np.mean(x, axis = 0)
-    variance = np.var(x, axis = 0)
+    mean = np.mean(x, axis=-1, keepdims=True)
+    variance = np.var(x, axis=-1, keepdims=True)
 
     normalized = (x - mean) / np.sqrt(variance + eps)
     result = (gamma * normalized) + beta
