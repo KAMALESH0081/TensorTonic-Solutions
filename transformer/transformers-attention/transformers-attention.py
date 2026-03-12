@@ -6,5 +6,9 @@ def scaled_dot_product_attention(Q: torch.Tensor, K: torch.Tensor, V: torch.Tens
     """
     Compute scaled dot-product attention.
     """
-    result = F.softmax((Q @ K.transpose(1, 2)) / math.sqrt(Q.size(-1)), dim = -1) @ V
-    return result
+    dk = Q.size(-1)
+    
+    scores = torch.matmul(Q, K.transpose(-2, -1)) / math.sqrt(dk)
+    attention_weights = F.softmax(scores, dim=-1)
+    
+    return torch.matmul(attention_weights, V)
