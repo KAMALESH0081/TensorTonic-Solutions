@@ -9,7 +9,7 @@ def apply_causal_mask(scores, mask_value=-1e9):
     scores = np.array(scores)
     T = scores.shape[-1]
     
-    mask_2d = np.tril(np.ones((T, T), dtype=bool))
-    result = np.where(mask_2d, scores, mask_value)
-    
-    return result
+    mask = np.triu(np.ones((T, T), dtype=bool), k=1)
+        
+    scores[..., mask] = mask_value
+    return scores
