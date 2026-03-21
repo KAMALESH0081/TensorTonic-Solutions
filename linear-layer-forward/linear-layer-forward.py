@@ -9,6 +9,6 @@ def linear_layer_forward(X, W, b):
             element = 0
             for k in range(len(W)):
                 element += (X[i][k] * W[k][j])
-            row.append(round(element, 3) + b[j])
+            row.append(element + b[j])
         result.append(row)
     return result
