@@ -7,6 +7,7 @@ def perplexity(prob_distributions, actual_tokens):
 
     sum_log_probs = 0
     N = len(actual_tokens)
+    
     for i in range(N):
         sum_log_probs += math.log(prob_distributions[i][actual_tokens[i]])
 
