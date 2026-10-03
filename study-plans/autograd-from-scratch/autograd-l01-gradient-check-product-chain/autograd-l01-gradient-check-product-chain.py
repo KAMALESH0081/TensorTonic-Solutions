@@ -29,4 +29,4 @@ def gradient_check_product_chain(
     
     return (float(loss),
             [float(a_d_a), float(a_d_b), float(a_d_c), float(a_d_f)],
-            [float(n_a), float(n_b), float(n_c), float(n_f)], abs_diff)
+            [float(n_a), float(n_b), float(n_c), float(n_f)], float(abs_diff))
